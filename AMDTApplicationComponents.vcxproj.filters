@@ -478,9 +478,6 @@
     <ClInclude Include="Include\acObjectNamesConstants.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\acGoToLineDialog.h">
-      <Filter>Include</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Include\acSourceCodeView.h">
@@ -610,6 +607,9 @@
       <Filter>Include</Filter>
     </CustomBuild>
     <CustomBuild Include="Include\acEulaDialog.h">
+      <Filter>Include</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Include\acGoToLineDialog.h">
       <Filter>Include</Filter>
     </CustomBuild>
   </ItemGroup>
