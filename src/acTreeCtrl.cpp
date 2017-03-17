@@ -252,7 +252,8 @@ void acTreeCtrl::onEditCopy()
                     }
                     else
                     {
-                        selectedText.append(", ");
+                        //selectedText.append(", ");
+                        selectedText.append("\t");
                     }
                 }
             }
@@ -279,7 +280,8 @@ void acTreeCtrl::onEditCopy()
                         }
                         else
                         {
-                            selectedText.append(", ");
+                            //selectedText.append(", ");
+                            selectedText.append("\t");
                         }
                     }
                 }

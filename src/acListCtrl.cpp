@@ -838,7 +838,8 @@ void acListCtrl::onEditCopy()
 
                             if ((indexesList.size() != 1) && (col < indexesList.at(indexesList.size() - 1).column()))
                             {
-                                selectedText.append(", ");
+                                //selectedText.append(", ");
+                                selectedText.append("\t");
                             }
                         }
                     }
@@ -925,7 +926,8 @@ void acListCtrl::onEditCopy()
                                     }
                                     else
                                     {
-                                        selectedText.append(", ");
+                                        //selectedText.append(", ");
+                                        selectedText.append("\t");
                                     }
                                 }
                             }

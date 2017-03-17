@@ -210,7 +210,8 @@ void acFrozenColumnTreeView::AppendRowToCopiedText(QString& copiedText, const QM
 
             if (col != model()->columnCount() - 1)
             {
-                copiedText.append(", ");
+                //copiedText.append(", ");
+                copiedText.append("\t");
             }
         }
     }
@@ -238,18 +239,17 @@ void acFrozenColumnTreeView::AppendRowToCopiedText(QString& copiedText, const QM
 
                     if (col != model()->columnCount() - 1)
                     {
-                        copiedText.append(", ");
+                        //copiedText.append(", ");
+                        copiedText.append("\t");
                     }
                 }
 
                 copiedRows << idx;
-
             }
         }
 
         // Append a newline for each row
         copiedText.append("\n");
-
     }
 }
 
@@ -330,7 +330,8 @@ void acFrozenColumnTreeView::onEditCopy()
                     }
                     else
                     {
-                        selectedText.append(", ");
+                        //selectedText.append(", ");
+                        selectedText.append("\t");
                     }
                 }
             }
