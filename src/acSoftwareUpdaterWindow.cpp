@@ -1178,7 +1178,7 @@ void acSoftwareUpdaterWindow::onSetupDownloadComplete(QNetworkReply* pReply)
 
             QString errorText2 = AC_STR_CheckForUpdatesFailureTitle;
             errorText2.replace(AC_STR_CheckForUpdatesPRODUCTNAMEConst, m_productName);
-            updateWindowStatusLabels(errorText, AC_STR_CheckForUpdatesDownloadErrorText, "", errorText2);
+            updateWindowStatusLabels(AC_STR_CheckForUpdatesDownloadError, errorText, "", errorText2);
         }
         else
         {

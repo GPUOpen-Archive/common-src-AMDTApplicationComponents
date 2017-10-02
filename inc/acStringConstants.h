@@ -250,19 +250,10 @@
 #define AC_STR_CheckForUpdatesDescriptionPageHTMLFormat "<html><body style=\"font-size:small;margin:0\"><b>%1</b><br><br>%2</body></html>" // NZ 
 
 #if (AMDT_BUILD_TARGET == AMDT_WINDOWS_OS)
-    #if (AMDT_BUILD_CONFIGURATION != AMDT_DEBUG_BUILD)
-        #define AC_STR_CheckForUpdatesServerXMLFileName L"http://developer.amd.com/assets//PRODUCTNAMEUpdate_win32.xml"
-        #define AC_STR_CheckForUpdatesServerXMLFileNameFor64Bits L"http://developer.amd.com/assets//PRODUCTNAMEUpdate_win64.xml"
-    #else
-        #define AC_STR_CheckForUpdatesServerXMLFileName L"http://bdclin64-gdt-jenkins.amd.com:8080/view/PRODUCTNAME/job/PRODUCTNAME-Full/lastSuccessfulBuild/artifact/main/PRODUCTNAME/Installer/PRODUCTNAMEUpdate_win32.xml"
-        #define AC_STR_CheckForUpdatesServerXMLFileNameFor64Bits L"http://bdclin64-gdt-jenkins.amd.com:8080/view/PRODUCTNAME/job/PRODUCTNAME-Full/lastSuccessfulBuild/artifact/main/PRODUCTNAME/Installer/PRODUCTNAMEUpdate_win64.xml"
-    #endif
+    #define AC_STR_CheckForUpdatesServerXMLFileName L"http://developer.amd.com/assets/PRODUCTNAMEUpdate_win32.xml"
+    #define AC_STR_CheckForUpdatesServerXMLFileNameFor64Bits L"http://developer.amd.com/assets/PRODUCTNAMEUpdate_win64.xml"
 #elif (AMDT_BUILD_TARGET == AMDT_LINUX_OS)
-    #if (AMDT_BUILD_CONFIGURATION != AMDT_DEBUG_BUILD)
-        #define AC_STR_CheckForUpdatesServerXMLFileName L"http://developer.amd.com/assets//PRODUCTNAMEUpdate_linux64.xml"
-    #else
-        #define AC_STR_CheckForUpdatesServerXMLFileName L"http://bdclin64-gdt-jenkins.amd.com:8080/view/PRODUCTNAME/job/PRODUCTNAME-Full-Linux/lastSuccessfulBuild/artifact/main/PRODUCTNAMEUpdate_linux64.xml"
-    #endif
+    #define AC_STR_CheckForUpdatesServerXMLFileName L"http://developer.amd.com/assets/PRODUCTNAMEUpdate_linux64.xml"
 #else
     # error unkown system
 #endif
