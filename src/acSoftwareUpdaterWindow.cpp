@@ -142,6 +142,13 @@ void  acSoftwareUpdaterWindow::connectSlots()
     rc = connect(m_pVersionDetailsWebView, SIGNAL(loadFinished(bool)), SLOT(onVersionLoadFinish(bool)));
     GT_ASSERT(rc);
 
+#if (AMDT_BUILD_TARGET == AMDT_WINDOWS_OS)
+    // the version of Qt used by CodeXL on Windows does not support HTTPS, so we always open URLs in an external browser
+    m_pVersionDetailsWebView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+    rc = connect(m_pVersionDetailsWebView, SIGNAL(linkClicked(const QUrl&)), SLOT(onVersionLinkClicked(const QUrl&)));
+    GT_ASSERT(rc);
+#endif
+
     rc = connect(m_pDestinationFolderButton, SIGNAL(clicked()), this, SLOT(onDestinationFolderButtonClick()));
     GT_ASSERT(rc);
 
@@ -653,6 +660,16 @@ void acSoftwareUpdaterWindow::onVersionLoadFinish(bool status)
     }
 
     m_isVersionDescriptionDisplayed = true;
+}
+
+void acSoftwareUpdaterWindow::onVersionLinkClicked(const QUrl& url)
+{
+#if (AMDT_BUILD_TARGET == AMDT_WINDOWS_OS)
+    QString linkUrl = url.url();
+    QDesktopServices::openUrl(url);
+#else
+    GT_UNREFERENCED_PARAMETER(url);
+#endif
 }
 
 void acSoftwareUpdaterWindow::setDialogLayout()
@@ -1173,8 +1190,7 @@ void acSoftwareUpdaterWindow::onSetupDownloadComplete(QNetworkReply* pReply)
         if (replyError != QNetworkReply::OperationCanceledError)
         {
             // Do not publish error message for user cancellation:
-            QString errorText = AC_STR_CheckForUpdatesDownloadErrorText;
-            errorText.replace(AC_STR_CheckForUpdatesPRODUCTNAMEConst, m_productName);
+            QString errorText = QString(AC_STR_CheckForUpdatesDownloadErrorText).arg(FindDownloadPath()).arg(m_productName);
 
             QString errorText2 = AC_STR_CheckForUpdatesFailureTitle;
             errorText2.replace(AC_STR_CheckForUpdatesPRODUCTNAMEConst, m_productName);
@@ -1306,8 +1322,7 @@ void acSoftwareUpdaterWindow::onDownloadXMLFileFinish(QNetworkReply* pReply)
     {
         m_isCheckingForNewUpdate = false;
         QString message;
-        QString error2 = AC_STR_CheckForUpdatesConnectionErrorText2;
-        error2.replace(AC_STR_CheckForUpdatesPRODUCTNAMEConst, m_productName);
+        QString error2 = QString(AC_STR_CheckForUpdatesConnectionErrorText2).arg(m_productName);
         message.append(AC_STR_CheckForUpdatesConnectionErrorText);
         message.append(error2);
         updateWindowStatusLabels(AC_STR_CheckForUpdatesConnectionError, message, "", AC_STR_CheckForUpdatesFailureTitle);

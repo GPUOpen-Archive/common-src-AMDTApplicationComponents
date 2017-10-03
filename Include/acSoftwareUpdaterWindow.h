@@ -280,6 +280,9 @@ private slots:
     /// Will get called once the version URL load had finished:
     void onVersionLoadFinish(bool status);
 
+    /// Will get called when user clicks a link:
+    void onVersionLinkClicked(const QUrl& url);
+
     /// Called when application package download is finished.
     void onSetupDownloadComplete(QNetworkReply* reply);
 
