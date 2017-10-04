@@ -41,11 +41,14 @@ acSoftwareUpdaterWindow::acSoftwareUpdaterWindow(const QString& productName, con
       m_pProgressBar(nullptr), m_pDestinationFolderLabel(nullptr), m_pDestinationFolderLineEdit(nullptr), m_pDestinationFolderButton(nullptr), m_pCurrentInfo(nullptr),
       m_pLatestVersionInfo(nullptr), m_errorCode(-1), m_iSkippedBuild(-1), m_shouldSkipThisBuild(false), m_strDownloadPath(""), m_isAutoCheckEnabled(true),
       m_installedProdVersion(""), m_latestProdVersion(""), m_iNextCheckScheduleInDay(1), m_strUserProfile(""),
-      m_strVersionInfoURL(""), m_isNewerVersionAvailable(false), m_isProcessingUpdate(false), m_isVersionDescriptionDisplayed(false), m_isUpdateNeeded(false),
+      m_strVersionInfoURL(""), m_isNewerVersionAvailable(false), m_isProcessingUpdate(false), m_isVersionDescriptionDisplayed(false), m_isUpdateNeeded(false), m_isDownloadSupported(true),
       m_pNetworkManager(nullptr), m_pNetworkReply(nullptr), m_pUpdaterThreadForLatestInfo(nullptr), m_pUpdaterThreadToDownloadPackage(nullptr),
       m_bytesReceived(0), m_bytesTotal(0), m_isDownloading(false), m_isCheckingForNewUpdate(false), m_isForcingUpdateCheck(false), m_isDialogRaised(false),
       m_downloadFileType(AC_DOWNLOAD_EXE), m_ProductIconId(productIconId)
 {
+#if (AMDT_BUILD_TARGET == AMDT_LINUX_OS)
+    m_downloadFileType = AC_DOWNLOAD_TAR;
+#endif
     m_productName = productName;
     m_title = QString(AC_STR_CheckForUpdatesWindowTitle).arg(m_productName);
     // Build the GUI layout:
@@ -142,13 +145,6 @@ void  acSoftwareUpdaterWindow::connectSlots()
     rc = connect(m_pVersionDetailsWebView, SIGNAL(loadFinished(bool)), SLOT(onVersionLoadFinish(bool)));
     GT_ASSERT(rc);
 
-#if (AMDT_BUILD_TARGET == AMDT_WINDOWS_OS)
-    // the version of Qt used by CodeXL on Windows does not support HTTPS, so we always open URLs in an external browser
-    m_pVersionDetailsWebView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-    rc = connect(m_pVersionDetailsWebView, SIGNAL(linkClicked(const QUrl&)), SLOT(onVersionLinkClicked(const QUrl&)));
-    GT_ASSERT(rc);
-#endif
-
     rc = connect(m_pDestinationFolderButton, SIGNAL(clicked()), this, SLOT(onDestinationFolderButtonClick()));
     GT_ASSERT(rc);
 
@@ -180,15 +176,17 @@ void acSoftwareUpdaterWindow::updateButtonsState()
         m_pDestinationFolderLineEdit->setEnabled(shouldEnableInstallButton);
         m_pDestinationFolderLabel->setEnabled(shouldEnableInstallButton);
 
-        m_pDestinationFolderButton->setVisible(m_isUpdateNeeded);
-        m_pDestinationFolderLineEdit->setVisible(m_isUpdateNeeded);
-        m_pDestinationFolderLabel->setVisible(m_isUpdateNeeded);
+        m_pDestinationFolderButton->setVisible(m_isUpdateNeeded && m_isDownloadSupported);
+        m_pDestinationFolderLineEdit->setVisible(m_isUpdateNeeded && m_isDownloadSupported);
+        m_pDestinationFolderLabel->setVisible(m_isUpdateNeeded && m_isDownloadSupported);
 
         m_pSkipBuildCheckBox->setEnabled(!m_isDownloading && m_isUpdateNeeded);
         m_pChkUpdateFrequencyComboBox->setEnabled(!m_isDownloading);
         m_pCheckOnStartUpCheckBox->setEnabled(!m_isDownloading);
         m_pProgressBar->setVisible(m_isDownloading);
         m_pCancelButton->setVisible(m_isDownloading);
+
+        m_pInstallButton->setVisible(m_isDownloadSupported);
     }
 }
 
@@ -601,7 +599,6 @@ void acSoftwareUpdaterWindow::setNewAvailableVersionDetails(bool isUpdateNeeded)
 
     m_isCheckingForNewUpdate = false;
     updateButtonsState();
-
 }
 
 
@@ -655,8 +652,12 @@ void acSoftwareUpdaterWindow::onVersionLoadFinish(bool status)
     {
         // For some reason when we get here we could not load the description URL.
         // Instead, we set the version number:
-        QString versionDescription = QString(AC_STR_CheckForUpdatesDescriptionText).arg(m_productName).arg(m_productName).arg(m_productName);
+        QString versionDescription = QString(AC_STR_CheckForUpdatesDescriptionTextDownload).arg(FindDownloadPath()).arg(m_productName).arg(m_productName).arg(m_productName);
+        m_isDownloadSupported = false;
+        m_pVersionDetailsWebView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+        connect(m_pVersionDetailsWebView, SIGNAL(linkClicked(const QUrl&)), SLOT(onVersionLinkClicked(const QUrl&)), Qt::UniqueConnection);
         updateWindowStatusLabels("New version found", versionDescription);
+        updateButtonsState();
     }
 
     m_isVersionDescriptionDisplayed = true;
@@ -664,12 +665,8 @@ void acSoftwareUpdaterWindow::onVersionLoadFinish(bool status)
 
 void acSoftwareUpdaterWindow::onVersionLinkClicked(const QUrl& url)
 {
-#if (AMDT_BUILD_TARGET == AMDT_WINDOWS_OS)
     QString linkUrl = url.url();
     QDesktopServices::openUrl(url);
-#else
-    GT_UNREFERENCED_PARAMETER(url);
-#endif
 }
 
 void acSoftwareUpdaterWindow::setDialogLayout()

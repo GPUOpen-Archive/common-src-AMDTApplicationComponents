@@ -384,6 +384,7 @@ private:
     bool m_isVersionDescriptionDisplayed;                  ///< Indicate update request is processing or over
 
     bool m_isUpdateNeeded;             ///< Indicate if dialog pop up is required.
+    bool m_isDownloadSupported;        ///< Indicate if the Updater window can download
 
     QUrl m_setUpUrl;                        ///< Contains package URL path.
     QNetworkAccessManager* m_pNetworkManager;     ///< Network access manager to download latest XML file from server.
