@@ -19,7 +19,7 @@
 #include <QtWidgets>
 
 // Forward declarations:
-class QWebView;
+class QWebEngineView;
 
 // Infra:
 #include <AMDTBaseTools/Include/gtString.h>
@@ -133,7 +133,7 @@ AC_API bool acExportTableViewToCSV(const QString& outputFilePath, const QTableWi
 /// \param outputFilePath the CSV output file path
 /// \param pWebView a web view on which a page is displayed. The function assumes that the HTML text contain a single table, and this single table will be exported to CSV
 /// \return true if the export succeeded
-AC_API bool acExportHTMLTableToCSV(const QString& outputFilePath, const QWebView* pWebView);
+// AC_API bool acExportHTMLTableToCSV(const QString& outputFilePath, const QWebView* pWebView);
 
 /// Extracts the file extension from a QString representing a file path:
 /// \filePath the requested file path

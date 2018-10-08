@@ -45,7 +45,7 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_USRDLL;NOMINMAX;QT_NO_OPENGL;AMDTAPPLICATIONCOMPONENTS_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalOptions> /MP %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions> /MP /wd4714 %(AdditionalOptions)</AdditionalOptions>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
@@ -204,76 +204,76 @@
     <CustomBuild Include="Include\acChartWindow.h">
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
     </CustomBuild>
     <ClInclude Include="Include\acBarGraphData.h" />
     <CustomBuild Include="Include\acBarsGraph.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="Include\acColoredBarGraphData.h" />
     <ClInclude Include="Include\acColoredBarsGraph.h" />
     <ClInclude Include="Include\acColorSampleBox.h" />
     <ClInclude Include="Include\acColours.h" />
     <CustomBuild Include="Include\acDataView.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acThumbnailView.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acDataViewGridTable.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acCustomPlot.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="Include\acDataViewItem.h" />
     <ClInclude Include="Include\acDefinitions.h" />
     <ClInclude Include="Include\acDialog.h" />
     <CustomBuild Include="Include\acDoubleSlider.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acDockWidget.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acHeaderView.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acFrozenColumnTreeView.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acGoToLineDialog.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="Include\acDisplay.h" />
     <ClInclude Include="Include\acGroupedBarsGraph.h" />
@@ -281,152 +281,152 @@
     <ClInclude Include="Include\acImageItemDelegate.h" />
     <ClInclude Include="Include\acImageManagerDefinitions.h" />
     <CustomBuild Include="Include\acVirtualListCtrl.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acVirtualListCtrlModel.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acImageManagerModel.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acImageView.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acLineEdit.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="Include\acItemDelegate.h" />
     <ClInclude Include="Include\acMessageBox.h" />
     <CustomBuild Include="Include\acNavigationChart.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="Include\acObjectNamesConstants.h" />
     <CustomBuild Include="Include\acProgressDlg.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acProgressAnimationWidget.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="Include\acQCPColoredBars.h" />
     <ClInclude Include="Include\acQMessageDialog.h" />
     <CustomBuild Include="Include\acQTextFilterCtrl.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acSplitter.h">
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
     </CustomBuild>
     <CustomBuild Include="Include\acTabWidget.h">
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
     </CustomBuild>
     <CustomBuild Include="Include\acSendErrorReportDialog.h">
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
     </CustomBuild>
     <CustomBuild Include="Include\acSoftwareUpdaterWindow.h">
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
     </CustomBuild>
     <CustomBuild Include="Include\acSoftwareUpdaterProxySetting.h">
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
     </CustomBuild>
     <CustomBuild Include="Include\acHelpAboutDialog.h">
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
     </CustomBuild>
     <CustomBuild Include="Include\acEulaDialog.h">
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
     </CustomBuild>
     <ClInclude Include="Include\acStackedBarGraph.h" />
     <ClInclude Include="Include\acStackedBarGraphhData.h" />
     <ClInclude Include="Include\acTableWidgetItem.h" />
     <CustomBuild Include="Include\acToolBar.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acTreeCtrl.h">
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
     </CustomBuild>
     <CustomBuild Include="Include\acMultiLinePlot.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp;%(AdditionalInputs)</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="Include\acMultiLinePlotData.h" />
     <ClInclude Include="Include\acValidators.h" />
     <CustomBuild Include="Include\acSourceCodeView.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acFindWidget.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acListCtrl.h">
-      <Command>"$(AMDTCommonExt)Qt\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command>"$(QTBINDIR)\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acQHTMLWindow.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="Include\acSourceCodeDefinitions.h" />
     <ClInclude Include="Include\acSourceCodeLanguageHighlighter.h" />
@@ -435,71 +435,71 @@
     <ClInclude Include="Include\acImageDataProxy.h" />
     <ClInclude Include="Include\acImageItem.h" />
     <CustomBuild Include="Include\acImageManager.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="Include\acRawDataExporter.h" />
     <ClInclude Include="Include\acRawFileHandler.h" />
     <ClInclude Include="Include\acCommandIDs.h" />
     <CustomBuild Include="Include\acVectorLineGraph.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\Timeline\acTimeline.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\Timeline\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\Timeline\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\Timeline\acTimelineBranch.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\Timeline\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\Timeline\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\Timeline\acTimelineFiltersDialog.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\Timeline\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\Timeline\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\Timeline\acTimelineGrid.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\Timeline\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\Timeline\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\Timeline\acTimelineItem.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\Timeline\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\Timeline\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\Timeline\acTimelineItemCurve.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\Timeline\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\Timeline\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="Include\acRibbonManager.h">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\moc.exe Include\%(Filename).h -o tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Command>
       <Message>moc creation</Message>
       <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\moc.exe;src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="inc\acSingeltonsDelete.h" />
     <ClInclude Include="inc\acStringConstants.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Include\res\icons\acIcons.qrc">
-      <Command>$(AMDTCommonExt)Qt\5.5\bin\rcc.exe Include\res\icons\%(Filename).qrc -o tmp\rcc_$(Platform)$(Configuration)\rcc_%(Filename).cpp</Command>
+      <Command>$(QTBINDIR)\rcc.exe Include\res\icons\%(Filename).qrc -o tmp\rcc_$(Platform)$(Configuration)\rcc_%(Filename).cpp</Command>
       <Message>qrc creation</Message>
       <Outputs>tmp\rcc_$(Platform)$(Configuration)\rcc_%(Filename).cpp</Outputs>
-      <AdditionalInputs>$(AMDTCommonExt)Qt\5.5\bin\rccc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs>$(QTBINDIR)\rccc.exe;src\%(Filename).cpp</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">src\%(Filename).cpp</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">src\%(Filename).cpp</AdditionalInputs>
     </CustomBuild>

@@ -25,7 +25,7 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkProxyFactory>
-#include <QtWebKitWidgets/QWebView>
+#include <QtWebEngineWidgets/QWebEngineView>
 
 // Local:
 #include <AMDTApplicationComponents/Include/acApplicationComponentsDLLBuild.h>
@@ -353,7 +353,7 @@ private:
     QPushButton* m_pCancelButton;    ///< PushButton to cancel the installation
     QPushButton* m_pCloseButton;    ///< PushButton to close the updater window
     QLabel* m_pUpdateHeaderLabel;       ///< Label for the dialog header
-    QWebView* m_pVersionDetailsWebView; ///< TextEdit to show new update information.
+    QWebEngineView* m_pVersionDetailsWebView; ///< TextEdit to show new update information.
     QLabel* m_pStatusLabel;           ///< Status bar
     QProgressBar* m_pProgressBar;       ///< Status bar
     QLabel* m_pDestinationFolderLabel;    ///< Label for the destination folder text box.

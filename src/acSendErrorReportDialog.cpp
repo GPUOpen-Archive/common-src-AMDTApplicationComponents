@@ -188,7 +188,6 @@ void acSendErrorReportDialog::onUnhandledException(osExceptionCode& exceptionCod
 
     // Display the error report dialog:
     displayErrorReportDialog(exceptionReason, exceptionCallStack, "", false, allowDifferentSystemPath);
-
 }
 
 // ---------------------------------------------------------------------------
@@ -250,7 +249,20 @@ void acSendErrorReportDialog::displayErrorReportDialog(osExceptionReason excepti
             // Set the call stack string into a class member:
             m_additionalInformation = additionalInformation;
 
+#ifdef SENDING_ERROR_REPORTS_SUPPORTED
             this->exec();
+#else
+            // show a dialog with error info and ask user to submit to the GitHub issues page:
+            QString bugReportDetails;
+            getBugReportDetails(bugReportDetails);
+
+            QString header;
+            header.append(QString(AC_STR_SendErrorReportString1).arg(m_productName));
+            header.append(AC_STR_NewLineA AC_STR_NewLineA AC_STR_pleaseSubmitErrorInfoToGitHub);
+            QSize messageSize(acScalePixelSizeToDisplayDPI(AC_DETAILS_MESSAGE_BOX_WIDTH), acScalePixelSizeToDisplayDPI(AC_DETAILS_MESSAGE_BOX_HEIGHT));
+            acQMessageDialog messageBox(QString(AC_STR_SendErrorReportDetailsDialogTitle).arg(m_productName), header, bugReportDetails, parentWidget(), messageSize);
+            messageBox.exec();
+#endif
         }
     }
 }
@@ -307,13 +319,15 @@ void acSendErrorReportDialog::onSendErrorReportClick()
         bool isUsingProxy = false;
         osPortAddress proxyServer;
 
-        bool rcProx = false; // NZ afGlobalVariablesManager::instance().getProxyInformation(isUsingProxy, proxyServer);
+        /*
+        bool rcProx = NZ afGlobalVariablesManager::instance().getProxyInformation(isUsingProxy, proxyServer);
 
         if (!rcProx)
         {
             GT_ASSERT(rcProx);
             isUsingProxy = false;
         }
+        */
 
         // Report the bug to our CRM system:
         setCursor(Qt::WaitCursor);
@@ -396,6 +410,7 @@ void acSendErrorReportDialog::getBugReportDetails(QString& bugReportDetails)
 {
     bugReportDetails.clear();
 
+#ifdef SENDING_ERROR_REPORTS_SUPPORTED
     // Get the optional user scenario information:
     QString additionalInformationString(m_pAdditionalInformation->toPlainText().toLatin1().data());
 
@@ -425,6 +440,7 @@ void acSendErrorReportDialog::getBugReportDetails(QString& bugReportDetails)
     bugReportDetails.append(AC_STR_NewLineA);
     bugReportDetails.append(userEmailAddressString);
     bugReportDetails.append("\n\n");
+#endif
 
     // Add the OS description string:
     bugReportDetails.append(AC_STR_SendErrorReportOperatingSystemTitle);

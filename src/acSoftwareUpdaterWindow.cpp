@@ -654,7 +654,8 @@ void acSoftwareUpdaterWindow::onVersionLoadFinish(bool status)
         // Instead, we set the version number:
         QString versionDescription = QString(AC_STR_CheckForUpdatesDescriptionTextDownload).arg(FindDownloadPath()).arg(m_productName).arg(m_productName).arg(m_productName);
         m_isDownloadSupported = false;
-        m_pVersionDetailsWebView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+        // TODO: setLinkDelegationPolicy deprecated, find alternatives.
+        // m_pVersionDetailsWebView->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
         connect(m_pVersionDetailsWebView, SIGNAL(linkClicked(const QUrl&)), SLOT(onVersionLinkClicked(const QUrl&)), Qt::UniqueConnection);
         updateWindowStatusLabels("New version found", versionDescription);
         updateButtonsState();
@@ -684,7 +685,7 @@ void acSoftwareUpdaterWindow::setDialogLayout()
     // Initialize window components
     m_pUpdateHeaderLabel = new QLabel;
     QFrame* pFrame = new QFrame;
-    m_pVersionDetailsWebView = new QWebView;
+    m_pVersionDetailsWebView = new QWebEngineView;
     QHBoxLayout* pFrameLayout = new QHBoxLayout;
     pFrameLayout->addWidget(m_pVersionDetailsWebView);
 
@@ -1322,7 +1323,9 @@ void acSoftwareUpdaterWindow::onDownloadXMLFileFinish(QNetworkReply* pReply)
         QString error2 = QString(AC_STR_CheckForUpdatesConnectionErrorText2).arg(m_productName);
         message.append(AC_STR_CheckForUpdatesConnectionErrorText);
         message.append(error2);
-        updateWindowStatusLabels(AC_STR_CheckForUpdatesConnectionError, message, "", AC_STR_CheckForUpdatesFailureTitle);
+        QString title = AC_STR_CheckForUpdatesFailureTitle;
+        title.replace(AC_STR_CheckForUpdatesPRODUCTNAMEConst, m_productName);
+        updateWindowStatusLabels(AC_STR_CheckForUpdatesConnectionError, message, "", title);
         OS_OUTPUT_DEBUG_LOG(L"Network connection error", OS_DEBUG_LOG_ERROR);
     }
 

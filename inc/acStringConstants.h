@@ -178,7 +178,7 @@
 #define AC_STR_SendErrorReportFailedHeaderDescription "Error report failed.\n\nPlease add the issue to CodeXL issues page https://github.com/GPUOpen-Tools/CodeXL/issues."
 #define AC_STR_SendErrorReportCallStackTitle "Call stack:"
 #define AC_STR_SendErrorReportOperatingSystemTitle "Operating System:"
-#define AC_STR_SendErrorReportDetailsDialogTitle " %1 error details"
+#define AC_STR_SendErrorReportDetailsDialogTitle " %1 Error Details"
 #define AC_STR_SendErrorReportDialogTitle "Error Report Status"
 #define AC_STR_SendErrorReportString1 "%1 has encountered a problem. We are very sorry for the inconvenience."
 #define AC_STR_SendErrorReportString2 "Please tell %1 support about this problem."
@@ -193,6 +193,7 @@
 #define AC_STR_SendErrorReportString5 "What were you doing when the problem happened (optional)?"
 #define AC_STR_SendErrorReportString6 "Email address (optional):"
 #define AC_STR_pleaseWaitReportingErrorToCRMSystem "Please wait, sending error report to CodeXL support..."
+#define AC_STR_pleaseSubmitErrorInfoToGitHub "Please copy and paste the below information and include it in a newly created issue on the CodeXL issues page https://github.com/GPUOpen-Tools/CodeXL/issues."
 
 // Privacy policy related items:
 #define AC_STR_PrivacyPolicyURL L"http://www.amd.com/us/aboutamd/Pages/privacy.aspx"

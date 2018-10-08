@@ -293,7 +293,8 @@ void acTimelineFiltersDialog::UpdateCheckStatesFromTree()
 
             UpdateCheckStateFromItem(pTopItem, pBranch, true);
             i++;
-            m_isAllItemsChecked = (m_pSubBranches->count() == m_visibleCPUThreadCount ? Qt::Checked : (m_visibleCPUThreadCount ? Qt::PartiallyChecked : Qt::Unchecked));
+            Qt::CheckState state = (m_pSubBranches->count() == m_visibleCPUThreadCount ? Qt::Checked : ((0 != m_visibleCPUThreadCount) ? Qt::PartiallyChecked : Qt::Unchecked));
+            m_isAllItemsChecked = (0 != state);
         }
     }
 }

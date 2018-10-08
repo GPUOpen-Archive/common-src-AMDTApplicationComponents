@@ -20,9 +20,10 @@
 // Qt:
 #include <qtIgnoreCompilerWarnings.h>
 #include <QtWidgets>
-#include <QWebElement>
-#include <QWebFrame>
-#include <QWebView>
+// Deprecated headers:
+// #include <QWebElement>
+// #include <QWebFrame>
+#include <QWebEngineView>
 
 // Infra:
 #include <AMDTBaseTools/Include/gtAssert.h>
@@ -449,74 +450,74 @@ AC_API bool acExportTableViewToCSV(const QString& outputFilePath, const QTableWi
     return retVal;
 }
 
+// TODO: commented due to deprecated headers, find alternatives
+// AC_API bool acExportHTMLTableToCSV(const QString& outputFilePath, const QWebView* pWebView)
+// {
+//     bool retVal = false;
 
-AC_API bool acExportHTMLTableToCSV(const QString& outputFilePath, const QWebView* pWebView)
-{
-    bool retVal = false;
+//     // Sanity check:
+//     GT_IF_WITH_ASSERT((pWebView != NULL) && (pWebView->page() != NULL))
+//     {
+//         QWebFrame* pMainFrame = pWebView->page()->mainFrame();
+//         GT_IF_WITH_ASSERT(pMainFrame != NULL)
+//         {
+//             // Get the table from the web view as web element:
+//             QWebElement tableElement = pMainFrame->documentElement().findFirst(AC_STR_HTMLTable);
 
-    // Sanity check:
-    GT_IF_WITH_ASSERT((pWebView != NULL) && (pWebView->page() != NULL))
-    {
-        QWebFrame* pMainFrame = pWebView->page()->mainFrame();
-        GT_IF_WITH_ASSERT(pMainFrame != NULL)
-        {
-            // Get the table from the web view as web element:
-            QWebElement tableElement = pMainFrame->documentElement().findFirst(AC_STR_HTMLTable);
+//             // Define a file handle:
+//             QFile fileHandle(outputFilePath);
 
-            // Define a file handle:
-            QFile fileHandle(outputFilePath);
+//             // Open the file for write:
+//             if (fileHandle.open(QFile::WriteOnly | QFile::Truncate))
+//             {
+//                 QTextStream data(&fileHandle);
+//                 QStringList strList;
 
-            // Open the file for write:
-            if (fileHandle.open(QFile::WriteOnly | QFile::Truncate))
-            {
-                QTextStream data(&fileHandle);
-                QStringList strList;
+//                 // Add the table headers to the CSV string:
+//                 QWebElementCollection tableHeaders = tableElement.findAll(AC_STR_HTMLTH);
 
-                // Add the table headers to the CSV string:
-                QWebElementCollection tableHeaders = tableElement.findAll(AC_STR_HTMLTH);
+//                 foreach (QWebElement headerElement, tableHeaders)
+//                 {
+//                     // Get current row columns:
+//                     QString colText = headerElement.toPlainText();
 
-                foreach (QWebElement headerElement, tableHeaders)
-                {
-                    // Get current row columns:
-                    QString colText = headerElement.toPlainText();
+//                     strList << AC_STR_QuotSpace + colText + AC_STR_QuotSpace;
+//                 }
 
-                    strList << AC_STR_QuotSpace + colText + AC_STR_QuotSpace;
-                }
-
-                data << strList.join(AC_STR_Tab) << AC_STR_NewLineA;
-                strList.clear();
+//                 data << strList.join(AC_STR_Tab) << AC_STR_NewLineA;
+//                 strList.clear();
 
 
-                // Get the table rows:
-                QWebElementCollection tableRows = tableElement.findAll(AC_STR_HTMLTR);
+//                 // Get the table rows:
+//                 QWebElementCollection tableRows = tableElement.findAll(AC_STR_HTMLTR);
 
-                foreach (QWebElement rowElement, tableRows)
-                {
-                    QWebElementCollection tableCols = rowElement.findAll(AC_STR_HTMLTD);
+//                 foreach (QWebElement rowElement, tableRows)
+//                 {
+//                     QWebElementCollection tableCols = rowElement.findAll(AC_STR_HTMLTD);
 
-                    for (QWebElement colElement : tableCols)
-                    {
-                        // Get current row columns:
-                        QString colText = colElement.toPlainText();
+//                     for (QWebElement colElement : tableCols)
+//                     {
+//                         // Get current row columns:
+//                         QString colText = colElement.toPlainText();
 
-                        strList << AC_STR_QuotSpace + colText + AC_STR_QuotSpace;
-                    }
+//                         strList << AC_STR_QuotSpace + colText + AC_STR_QuotSpace;
+//                     }
 
-                    data << strList.join(AC_STR_Tab) << AC_STR_NewLineA;
-                    strList.clear();
+//                     data << strList.join(AC_STR_Tab) << AC_STR_NewLineA;
+//                     strList.clear();
 
-                }
+//                 }
 
-                // Close the file:
-                fileHandle.close();
+//                 // Close the file:
+//                 fileHandle.close();
 
-                retVal = true;
-            }
-        }
-    }
+//                 retVal = true;
+//             }
+//         }
+//     }
 
-    return retVal;
-}
+//     return retVal;
+// }
 
 #if ((AMDT_BUILD_TARGET == AMDT_LINUX_OS) && (AMDT_LINUX_VARIANT == AMDT_GENERIC_LINUX_VARIANT))
 // ---------------------------------------------------------------------------

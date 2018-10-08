@@ -1940,7 +1940,7 @@ void acListCtrl::enableRowEditing(int row, bool enable)
             }
             else
             {
-                itemFlags &= !Qt::ItemIsEditable;
+                itemFlags &= (Qt::ItemIsEditable == 0);
             }
 
             pCurrentItem->setFlags(itemFlags);
