@@ -30,7 +30,7 @@
     <Import Project="..\Local-CommonProjects.props" />
     <Import Project="$(AMDTCommonAMD)\APPSDK\Global-OpenCL-NoLib.props" />
     <Import Project="$(AMDTCommonExt)\QScintilla\Global-QScintilla.props" />
-    <Import Project="$(AMDTCommonExt)\Qt\Global-QT.props" />
+    <Import Project="$(CommonProjectsDir)\Qt\Global-QT.props" />
     <Import Project="$(AMDTCommonExt)\qcustomplot\Global-qcustomplot.props" />
   </ImportGroup>
   <PropertyGroup>
