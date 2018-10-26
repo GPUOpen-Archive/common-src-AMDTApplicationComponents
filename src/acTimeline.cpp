@@ -734,6 +734,7 @@ void acTimeline::paintEvent(QPaintEvent* /* event */)
 
 void acTimeline::mousePressEvent(QMouseEvent* event)
 {
+    bool doUpdateGrid = false;
     if (event->button() == Qt::LeftButton)
     {
         int mouseX = event->x();
@@ -743,8 +744,38 @@ void acTimeline::mousePressEvent(QMouseEvent* event)
             m_bStartDrag = true;
             m_nStartDragX = mouseX;
             m_dStartSelectionPivot = (mouseX - m_nTitleWidth) / (double)rowWidth();
-            updateGrid();
+            doUpdateGrid = true;
         }
+
+        if ((event->modifiers() & Qt::AltModifier) || (m_pGrid->rect().contains(event->x(), event->y())))
+        {
+            auto mouseTime = PixelToTime(mouseX);
+
+            // Remove a marker if we are within 5 pixels
+            bool removedItem = false;
+            for (auto marker : m_markers)
+            {
+                int pixelValue = TimeToPixel(marker->m_nTimeStamp - m_nStartTime);
+                if (abs(pixelValue - mouseX) < 5)
+                {
+                    removeMarker(marker->m_nTimeStamp);
+                    removedItem = true;
+                    break; // We only remove one item at a time
+                }
+            }
+
+            if (!removedItem)
+            {
+                addMarker(mouseTime + m_nStartTime, QColor(255, 0, 0, 255));
+            }
+
+            doUpdateGrid = true;
+        }
+    }
+
+    if (doUpdateGrid)
+    {
+        updateGrid();
     }
 }
 
@@ -1625,6 +1656,13 @@ void acTimeline::updateGrid()
         time = adjustedStartTime + (quint64)(endPivot * m_nVisibleRange);
         m_pGrid->setEndSelectedTime(time);
 
+        m_pGrid->clearMarkers();
+        for (const TimelineMarker* marker : m_markers)
+        {
+            const auto time = (TimeToPixel(marker->m_nTimeStamp - m_nStartTime) - m_nTitleWidth) / (double)rowWidth();
+            m_pGrid->addMarker(adjustedStartTime + (quint64)(time*m_nVisibleRange));
+        }
+
         m_pGrid->update();
     }
 }
@@ -1780,6 +1818,19 @@ int acTimeline::TimeToPixel(double timeValue, bool checkBounds)
     }
 
     return retPixel;
+}
+
+double acTimeline::PixelToTime(const int pixelValue)
+{
+    const int drawingWidth = rowWidth();
+    const double drawingPixel = visibleRange() / (drawingWidth * 1.0);
+
+    if (m_pGrid != nullptr)
+    {
+        return (pixelValue - titleWidth())*drawingPixel + m_pGrid->visibleStartTime();
+    }
+
+    return 0.0;
 }
 
 acTimeline::TimelineMarker::TimelineMarker(quint64 timeStamp, QColor color) :

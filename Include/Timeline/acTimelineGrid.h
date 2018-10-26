@@ -186,6 +186,20 @@ public:
     /// \return the timestamp corresponding to the end of a selection
     quint64 endSelectedTime() const { return m_nEndSelectedTime; }
 
+    /// Clear all markers from the grid
+    void clearMarkers();
+
+    /// Inserts a marker into the timeline. Used to display times and delta times between markers. Works like the
+    /// selected time, but the markers are permanent.
+    /// \param time The timestamp of the marker to add.
+    void addMarker(const quint64 time);
+
+    /// Removes a marker from the timeline at the specified timestamp. Only one marker is removed if several have
+    /// the same timestamp.
+    /// \param time The timestamp of the marker to remove
+    /// \return Whether a marker was found and removed at the specified timestamp
+    bool removeMarker(const quint64 time);
+
     /// Sets the format string to used when displaying the duration of the selection in
     /// the duration hint.
     /// \param newDurationHintLabel the format string to used when displaying the duration of
@@ -242,7 +256,7 @@ private:
 
     /// Method called by paintEvent to draw the hints along the grid
     /// \param painter the QPainter instance to use for painting
-    void drawTimeHints(QPainter& painter);
+    void drawTimeHints(QPainter& painter, quint64 nStartTime, quint64 nEndTime, bool clearBackground = false);
 
     /// Adds the unicode-left-arrow or unicode-right-arrow character to the given string, if
     /// the given timestamp is not within the visible range of the time grid
@@ -265,6 +279,8 @@ private:
 
     quint64      m_nSelectedTime;                    ///< The selected timestamp.  Used to display a hint in the time grid.
     quint64      m_nEndSelectedTime;                 ///< The timestamp corresponding to the end of a selection.  Used to display a hint in the time grid. If different than "selectedTime", then three hints are shown (start of selection, end of selection, and duration of selection).
+
+	QList<quint64> m_markers;                        ///< A list of extra marker times to draw
 
     bool         m_bShowTimeHint;                    ///< A flag indicating whether or not hints should be shown in the time grid for the selected time (either a single timestamp or a range of time).  Defaults to true.
 

@@ -134,6 +134,21 @@ void acTimelineGrid::setEndSelectedTime(const quint64 newEndSelectedTime)
     ensureValidVisibleRange();
 }
 
+void acTimelineGrid::clearMarkers()
+{
+    m_markers.clear();
+}
+
+void acTimelineGrid::addMarker(const quint64 time)
+{
+    m_markers.append(time);
+}
+
+bool acTimelineGrid::removeMarker(const quint64 time)
+{
+    return m_markers.removeOne(time);
+}
+
 void acTimelineGrid::setDurationHintLabel(const QString newDurationHintLabel)
 {
     m_strDurationHintLabel = newDurationHintLabel;
@@ -288,7 +303,33 @@ void acTimelineGrid::paintEvent(QPaintEvent* /* event */)
         }
     }
 
-    drawTimeHints(painter);
+    // Draw markers first
+    QList<quint64> markersToDraw;
+    for (const auto marker : m_markers)
+    {
+        if ((marker > m_nVisibleStartTime) && (marker < m_nVisibleStartTime + m_nVisibleRange))
+            markersToDraw.append(marker);
+    }
+
+    if (markersToDraw.size() > 0)
+    {
+        if (markersToDraw.size() == 1)
+        {
+            drawTimeHints(painter, markersToDraw[0], markersToDraw[0]);
+        }
+        else
+        {
+            quint64 prevMarker = markersToDraw[0];
+            for (auto marker = markersToDraw.cbegin() + 1; marker != markersToDraw.cend(); marker++)
+            {
+                drawTimeHints(painter, prevMarker, *marker);
+                prevMarker = *marker;
+            }
+        }
+    }
+
+    // Draw the selected times after markers as we want selected time to take precedence over markers
+    drawTimeHints(painter, m_nSelectedTime, m_nEndSelectedTime, true);
 
     // draw top line last, using the pre-calculated right coordinate
     if (m_nGridRightXPosition > 0)
@@ -316,42 +357,51 @@ void acTimelineGrid::resizeEvent(QResizeEvent* event)
     QWidget::resizeEvent(event);
 }
 
-void acTimelineGrid::drawTimeHints(QPainter& painter)
+void drawDoubleArrowLine(QPainter& painter, const int x1, const int y1, const int x2, const int y2, const int arrowSize)
+{
+    painter.drawLine(x1, y1, x2, y2);
+    painter.drawLine(x1, y1, x1 + arrowSize, y1 - arrowSize);
+    painter.drawLine(x1, y1, x1 + arrowSize, y1 + arrowSize);
+    painter.drawLine(x2, y2, x2 - arrowSize, y2 - arrowSize);
+    painter.drawLine(x2, y2, x2 - arrowSize, y2 + arrowSize);
+
+}
+
+void acTimelineGrid::drawTimeHints(QPainter& painter, const quint64 nStartTime, quint64 nEndTime, bool clearBackground)
 {
     if (m_bShowTimeHint)
     {
         QString startStrNum;
 
-        startStrNum.setNum(m_nSelectedTime * m_dInverseScalingFactor, 'f', m_precision);
+        startStrNum.setNum(nStartTime * m_dInverseScalingFactor, 'f', m_precision);
 
-        addOutOfRangeCharacterToHintString(startStrNum, m_nSelectedTime);
+        addOutOfRangeCharacterToHintString(startStrNum, nStartTime);
 
         int startTextWidth = fontMetrics().width(startStrNum);
-        QRect startHintRect = calcHintRect(startTextWidth, m_nSelectedTime);
+        QRect startHintRect = calcHintRect(startTextWidth, nStartTime);
         QColor hintColor = palette().color(QPalette::ToolTipBase);
-        hintColor.setAlpha(192);
 
-        if (m_nSelectedTime != m_nEndSelectedTime)
+        if (nStartTime != nEndTime)
         {
             QString endStrNum;
-            endStrNum.setNum(m_nEndSelectedTime * m_dInverseScalingFactor, 'f', m_precision);
+            endStrNum.setNum(nEndTime * m_dInverseScalingFactor, 'f', m_precision);
 
-            addOutOfRangeCharacterToHintString(endStrNum, m_nEndSelectedTime);
+            addOutOfRangeCharacterToHintString(endStrNum, nEndTime);
             int endTextWidth = fontMetrics().width(endStrNum);
-            QRect endHintRect = calcHintRect(endTextWidth, m_nEndSelectedTime);
+            QRect endHintRect = calcHintRect(endTextWidth, nEndTime);
 
             quint64 diffTime;
             quint64 absDiffTime;
 
-            if (m_nEndSelectedTime > m_nSelectedTime)
+            if (nEndTime > nStartTime)
             {
-                diffTime = m_nEndSelectedTime - m_nSelectedTime;
-                absDiffTime = m_nSelectedTime + (diffTime / 2);
+                diffTime = nEndTime - nStartTime;
+                absDiffTime = nStartTime + (diffTime / 2);
             }
             else
             {
-                diffTime = m_nSelectedTime - m_nEndSelectedTime;
-                absDiffTime = m_nEndSelectedTime + (diffTime / 2);
+                diffTime = nStartTime - nEndTime;
+                absDiffTime = nEndTime + (diffTime / 2);
             }
 
             if ((startHintRect.left() == m_nGridLabelSpace && endHintRect.right() == m_nGridLabelSpace + m_nGridSpace - 1) ||
@@ -370,9 +420,9 @@ void acTimelineGrid::drawTimeHints(QPainter& painter)
             if (startHintRect.intersects(endHintRect) || startHintRect.intersects(diffHintRect)
                 || endHintRect.intersects(diffHintRect))
             {
-                if (m_nEndSelectedTime > m_nSelectedTime)
+                if (nEndTime > nStartTime)
                 {
-                    startStrNum = startStrNum + " - " + endStrNum + " (" + diffStrNum + ")" ;
+                    startStrNum = startStrNum + " - " + endStrNum + " (" + diffStrNum + ")";
                 }
                 else
                 {
@@ -380,10 +430,14 @@ void acTimelineGrid::drawTimeHints(QPainter& painter)
                 }
 
                 startTextWidth = fontMetrics().width(startStrNum);
-                startHintRect = calcHintRect(startTextWidth, m_nSelectedTime);
+                startHintRect = calcHintRect(startTextWidth, nStartTime);
             }
             else
             {
+                const int middle = startHintRect.top() + (startHintRect.bottom() - startHintRect.top()) / 2;
+                if (clearBackground)
+                    painter.fillRect(QRect(startHintRect.topLeft(), endHintRect.bottomRight()), palette().color(QWidget::backgroundRole()));
+                drawDoubleArrowLine(painter, startHintRect.right() + 1, middle, endHintRect.left() - 1, middle, 3);
                 painter.fillRect(endHintRect, hintColor);
                 painter.drawText(endHintRect, Qt::AlignCenter, endStrNum);
 
@@ -397,6 +451,7 @@ void acTimelineGrid::drawTimeHints(QPainter& painter)
 
     }
 }
+
 
 void acTimelineGrid::addOutOfRangeCharacterToHintString(QString& hintString, quint64 timeStamp)
 {

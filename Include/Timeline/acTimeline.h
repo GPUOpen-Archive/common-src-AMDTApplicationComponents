@@ -311,9 +311,13 @@ public:
     /// Set should v scroll to end flag
     void ShouldScrollToEnd(bool scroll) { m_shouldVScrollToEnd = scroll; }
 
-    /// returns pixel coord of a time value
+    /// returns x pixel coord of a time value
     /// \param time value
     int TimeToPixel(double timeValue, bool checkBounds = true);
+
+    /// returns time value of an x pixel coord
+    /// \param time value
+    double PixelToTime(const int pixelValue);
 
 protected:
     /// Overridden QWidget method used to display tooltip hints.
@@ -444,6 +448,8 @@ private:
         quint64 m_nTimeStamp;  ///< The timestamp of the marker.
         QColor m_color;        ///< The color of the marker.
     };
+	/// Used for sorting markers
+	static bool markerLessThan(const TimelineMarker* m1, const TimelineMarker* m2) { return m1->m_nTimeStamp < m2->m_nTimeStamp; }
 
     /// Resets the row index for all branches.
     void resetRowIndex();
